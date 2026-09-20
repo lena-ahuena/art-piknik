@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Арт-пикник — арендаторы и партнёры</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #e9e7e2;
+    color: #242321;
+    font-family: Arial, "Helvetica Neue", sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    max-width: 100%;
+    min-height: 297mm;
+    margin: 12mm auto;
+    padding: 15mm 16mm 13mm;
+    background: #fffdf9;
+    box-shadow: 0 4px 24px rgba(0,0,0,.10);
+    position: relative;
+    overflow: hidden;
+  }
+  .page + .page { margin-top: 8mm; }
+
+  .eyebrow {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #77736d;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: 1px;
+    font-weight: 800;
+  }
+
+  .date {
+    text-align: center;
+    margin-top: 9px;
+    font-size: 13px;
+    color: #68645e;
+  }
+
+  .intro {
+    max-width: 150mm;
+    margin: 13px auto 0;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #4e4b46;
+  }
+
+  .divider {
+    width: 42mm;
+    height: 2px;
+    margin: 15px auto 17px;
+    background: #252321;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9mm;
+  }
+
+  .card {
+    border: 1px solid #cbc7c0;
+    border-radius: 10px;
+    padding: 8mm 7mm 7mm;
+    background: #faf8f3;
+  }
+  .card.partner { background: #f6f7f5; }
+
+  .card-title { font-size: 17px; font-weight: 800; letter-spacing: .2px; margin-bottom: 8px; }
+  .card-desc { font-size: 10.5px; line-height: 1.45; color: #56524c; min-height: 30px; }
+
+  .price { margin: 10px 0 2px; text-align: center; font-size: 24px; font-weight: 800; }
+  .price-sub { text-align: center; color: #77736d; font-size: 9px; margin-bottom: 12px; }
+
+  h2 { font-size: 15px; line-height: 1.2; margin: 0 0 7px; font-weight: 800; }
+  h3 { font-size: 10.5px; margin: 10px 0 5px; text-transform: uppercase; letter-spacing: .6px; color: #67635d; }
+
+  ul { margin: 0; padding-left: 16px; }
+  li { font-size: 9.7px; line-height: 1.42; margin: 3px 0; }
+
+  .note {
+    margin-top: 9px; padding-top: 8px; border-top: 1px solid #d7d3cc;
+    font-size: 8.7px; line-height: 1.45; color: #69655f;
+  }
+
+  .fact-strip{
+    display:grid; grid-template-columns: repeat(4,1fr); gap:6mm;
+    margin: 12px 0 3px; padding: 6mm 0; border-top:1px solid #d7d3cc; border-bottom:1px solid #d7d3cc;
+  }
+  .fact-strip .fact b{ display:block; font-size:8px; text-transform:uppercase; letter-spacing:.5px; color:#89847d; margin-bottom:2px; }
+  .fact-strip .fact span{ font-size:10.5px; }
+
+  .section { margin-top: 12mm; }
+  .section-head { display: flex; align-items: baseline; gap: 9px; margin-bottom: 7px; }
+  .section-head h2 { font-size: 18px; margin: 0; }
+  .section-head span { font-size: 9px; color: #89847d; letter-spacing: .8px; text-transform: uppercase; }
+
+  .wide-box { border: 1px solid #cbc7c0; border-radius: 9px; padding: 7mm; background: #fff; }
+  .wide-box p { font-size: 10px; line-height: 1.5; margin: 0 0 6px; }
+  .wide-box p:last-child { margin-bottom: 0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; }
+  .mini-list li { font-size: 9.5px; }
+
+  .highlight {
+    margin-top: 8px; padding: 8px 10px; border-left: 3px solid #34312d;
+    background: #f4f1eb; font-size: 9.5px; line-height: 1.45;
+  }
+
+  .form { border: 1px solid #cbc7c0; border-radius: 9px; overflow: hidden; background: #fff; }
+  .row { display: grid; grid-template-columns: 48mm 1fr; min-height: 11mm; border-bottom: 1px solid #ddd9d2; }
+  .row:last-child { border-bottom: 0; }
+  .label { padding: 7px 10px; font-size: 9px; font-weight: 700; background: #f5f2ec; }
+  .value { padding: 7px 10px; font-size: 9.5px; color: #55514b; display:flex; align-items:center; }
+
+  .cta-wrap{ text-align:center; margin: 9mm 0 4mm; }
+  .cta-btn{
+    display:inline-block; background:#242321; color:#fffdf9; text-decoration:none;
+    font-weight:800; font-size:13px; letter-spacing:.3px; padding:12px 28px; border-radius:30px;
+  }
+  .cta-sub{ font-size:9px; color:#77736d; margin-top:8px; }
+  .cta-alt{ font-size:9.5px; color:#55514b; margin-top:10px; }
+  .cta-alt a{ color:#242321; }
+
+  .footer { margin-top: 11mm; padding-top: 6mm; border-top: 1px solid #d5d1ca; text-align: center; color: #77726b; font-size: 9px; line-height: 1.5; }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+    .page + .page { margin-top: 0; }
+    .cta-wrap{ display:none; }
+  }
+
+  @media (max-width: 700px){
+    .page{ width:100%; min-height:auto; margin:0; padding:26px 18px 34px; box-shadow:none; }
+    .page + .page{ margin-top:0; border-top:8px solid #e9e7e2; }
+    h1{ font-size:26px; }
+    .cards{ grid-template-columns:1fr; }
+    .fact-strip{ grid-template-columns:1fr 1fr; }
+    .two-col{ grid-template-columns:1fr; gap:6mm; }
+    .row{ grid-template-columns:1fr; }
+    .label{ border-bottom:1px solid #eee; }
+  }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="eyebrow">приглашение к участию</div>
+  <h1>АРТ-ПИКНИК</h1>
+  <div class="date">4 октября 2026 · 14:00–19:00</div>
+
+  <p class="intro">
+    Просто захотели собрать вокруг студии творческих людей и локальных мастеров —
+    камерный арт-пикник: свободный вход, творчество, музыка, своп,
+    активности и финальный розыгрыш.
+  </p>
+
+  <div class="fact-strip">
+    <div class="fact"><b>Заезд</b><span>с 13:00</span></div>
+    <div class="fact"><b>Гости</b><span>14:00–19:00</span></div>
+    <div class="fact"><b>Площадка</b><span>студия+улица+крыша</span></div>
+    <div class="fact"><b>Вход</b><span>свободный</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cards">
+    <article class="card">
+      <div class="card-title">🏪 Арендатор</div>
+      <div class="card-desc">Для тех, кто хочет продавать свои товары или услуги прямо на мероприятии.</div>
+
+      <div class="price">700 ₽</div>
+      <div class="price-sub">фиксированная стоимость одного места, на весь день</div>
+
+      <h3>Что получает участник</h3>
+      <ul>
+        <li>отдельное место на площадке (студия / улица / крыша — распределим заранее под формат вашей активности);</li>
+        <li>розетку — на крыше и в студии, на улице уточняйте заранее;</li>
+        <li>самостоятельные продажи без процента организатору;</li>
+        <li>упоминание в соцсетях мероприятия;</li>
+        <li>участие в общем розыгрыше в конце дня.</li>
+      </ul>
+
+      <h3>Что нужно со своей стороны</h3>
+      <ul>
+        <li>подтвердить участие и внести оплату заранее;</li>
+        <li>подготовить стол, оборудование и всё для работы самостоятельно;</li>
+        <li>передать один приз для финального розыгрыша;</li>
+        <li>после мероприятия оставить место чистым.</li>
+      </ul>
+
+      <div class="note">
+        <b>Важно:</b> оплата фиксированная, без процента с продаж. Организатор не гарантирует конкретное количество гостей или объём продаж.
+        Если формат связан с едой/напитками — это зона улицы, крыша для еды закрыта.
+      </div>
+    </article>
+
+    <article class="card partner">
+      <div class="card-title">🎁 Партнёр розыгрыша</div>
+      <div class="card-desc">Для тех, кто хочет предоставить приз для главного финального розыгрыша, без своей точки на площадке.</div>
+
+      <div class="price" style="font-size:19px;">Место не нужно</div>
+      <div class="price-sub">участие бесплатно, в обмен на инфоподдержку</div>
+
+      <h3>Что получает партнёр</h3>
+      <ul>
+        <li>упоминание в соцсетях студии — в анонсе и в пост-релизе;</li>
+        <li>представление партнёра и приза во время розыгрыша;</li>
+        <li>отметку аккаунта, доступ к живой аудитории без необходимости присутствовать.</li>
+      </ul>
+
+      <h3>Что можно предоставить</h3>
+      <ul>
+        <li>товар, сертификат или услугу;</li>
+        <li>мастер-класс, абонемент или промокод;</li>
+        <li>другой приз, подходящий формату.</li>
+      </ul>
+
+      <h3>Что нужно со своей стороны</h3>
+      <ul>
+        <li>название, аккаунт, короткое описание и фото приза;</li>
+        <li>передать приз не позднее чем за 2–3 дня до мероприятия — чтобы успеть в анонс.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>🎟 Финальный розыгрыш</h2><span>как это работает</span></div>
+    <div class="wide-box">
+      <p>При регистрации каждый гость получает <b>1 билет</b>. Дополнительные билеты выдаются за участие в активностях — покупку, обмен на свопе, посещение точек. Чем активнее взаимодействие с вашей точкой, тем больше номерков в игре — это работает на всех арендаторов сразу.</p>
+      <p>Розыгрыш проходит в 17:30–18:00, призы партнёров представляются гостям <b>с указанием партнёра</b>.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>🌦 Погода</h2><span>план на случай дождя</span></div>
+    <div class="wide-box">
+      <p>При дожде мероприятие переносится в помещение студии. Решение принимаем и сообщаем всем участникам не позднее <b>10:00 в день мероприятия</b>.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>📣 Взаимное продвижение</h2><span>без сложных условий</span></div>
+    <div class="wide-box">
+      <p>Мы рассказываем об участниках и партнёрах у себя. Участникам желательно поддержать анонс мероприятия в своих соцсетях и отметить организатора.</p>
+      <div class="highlight"><b>Для партнёров розыгрыша:</b> упоминание/отметка в материалах о мероприятии, отдельное представление приза во время розыгрыша и отметка в итогах.</div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">подтверждение участия</div>
+  <h1 style="font-size:28px;">ДАННЫЕ ДЛЯ УЧАСТИЯ</h1>
+  <div class="date">Заполните с телефона за минуту — форма ниже</div>
+
+  <div class="divider"></div>
+
+  <div class="form">
+    <div class="row"><div class="label">Название / имя</div><div class="value">как к вам обращаться, что рассказать о вас</div></div>
+    <div class="row"><div class="label">Instagram / Telegram / VK</div><div class="value">ссылка на ваш аккаунт для отметки</div></div>
+    <div class="row"><div class="label">Формат</div><div class="value">☐ Арендатор &nbsp; ☐ Партнёр &nbsp; ☐ Оба</div></div>
+    <div class="row"><div class="label">Товар / услуга / приз</div><div class="value">что продаёте и/или что отдаёте на розыгрыш</div></div>
+    <div class="row"><div class="label">Контакт для связи</div><div class="value">телефон или телеграм, чтобы согласовать детали</div></div>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="cta-btn" href="https://forms.gle/7TSDSLh8RU5VsrCVA" target="_blank" rel="noopener">Заполнить анкету онлайн →</a>
+    <div class="cta-sub">Откроется форма — займёт меньше минуты, данные придут организатору автоматически</div>
+    <div class="cta-alt">Не открывается форма? Можно прислать эти же данные сообщением напрямую — <a href="https://t.me/katarina2two" target="_blank" rel="noopener">написать в Telegram</a></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Для арендаторов</h2><span>что важно знать заранее</span></div>
+    <div class="two-col">
+      <div class="wide-box">
+        <h2>До мероприятия</h2>
+        <ul class="mini-list">
+          <li>подтвердить участие и оплатить место (700 ₽);</li>
+          <li>передать название и ссылку на аккаунт;</li>
+          <li>подготовить приз для розыгрыша;</li>
+          <li>подготовить всё необходимое для своей точки.</li>
+        </ul>
+      </div>
+      <div class="wide-box">
+        <h2>На мероприятии</h2>
+        <ul class="mini-list">
+          <li>самостоятельно работать со своими гостями;</li>
+          <li>самостоятельно принимать оплату;</li>
+          <li>соблюдать правила площадки (еда — не на крыше);</li>
+          <li>после мероприятия привести место в порядок.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><h2>Для партнёров розыгрыша</h2><span>простой обмен</span></div>
+    <div class="wide-box">
+      <div class="two-col">
+        <div>
+          <h2>Партнёр предоставляет</h2>
+          <ul class="mini-list">
+            <li>приз для финального розыгрыша;</li>
+            <li>название и аккаунт;</li>
+            <li>короткое описание и фото приза.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Организатор предоставляет</h2>
+          <ul class="mini-list">
+            <li>упоминание и отметку в соцсетях;</li>
+            <li>представление партнёра во время розыгрыша;</li>
+            <li>упоминание при публикации итогов.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Будем рады собрать вокруг студии людей и проекты, с которыми хочется делать что-то ещё.
+    <br><b>Без пафоса, зато с нормальной организацией.</b>
+  </div>
+</section>
+
+</body>
+</html>
